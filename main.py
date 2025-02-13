@@ -1,6 +1,6 @@
 import time,threading
-
 import speech_recognition as sr
+import YggDrasil
 
 r = sr.Recognizer()
 e = threading.Event()
@@ -14,7 +14,8 @@ def Comandos(Comando_Voz,Comando_Aceitavel,Comando_Def):
         print(resultado)
     else:
         print("Não Aceito")
-    
+
+YggDrasil()
 
 with sr.Microphone() as source:
     audio = r.listen(source)
