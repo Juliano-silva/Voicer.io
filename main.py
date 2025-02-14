@@ -15,7 +15,6 @@ def Comandos(Comando_Voz,Comando_Aceitavel,Comando_Def):
     else:
         print("Não Aceito")
 
-YggDrasil()
 
 with sr.Microphone() as source:
     audio = r.listen(source)
