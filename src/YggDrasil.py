@@ -1,8 +1,15 @@
-import os,sqlite3
+import os,sqlite3,json
 from pathlib import Path
 from colorist import *
 
 
+Lista_Extensão = '''{
+    "Extension":[
+        {"Sigla":"py","Comando":"python"},
+        {"Sigla":"js","Comando":"node"},
+        {"Sigla":"java","Comando":"java"}
+    ]
+    }'''
 
 def YggDrasil(URL,File):
     Banco = sqlite3.connect(File)
@@ -28,19 +35,15 @@ def YggDrasil(URL,File):
             cursor.execute(f'INSERT INTO History values(null,"{str(FILE_OPEN).split("\\")[-1]}","{FILE_OPEN}")')
 
             extension = str(FILE_OPEN).split(".")[1]
-
-            if extension == "py":
-                os.system(f"python {FILE_OPEN}")
-            elif extension == "js":
-                os.system(f"node {FILE_OPEN}")
-            elif extension == "java":
-                os.system(f"java {FILE_OPEN}")
-            else:
-                os.startfile(FILE_OPEN)
+            Comandos = json.loads(Lista_Extensão)["Extension"]
+            for Comand in Comandos:
+                if extension == Comand["Sigla"]:
+                    os.system(Comand["Comando"] + " " + FILE_OPEN)
+                else:
+                    os.startfile(FILE_OPEN)
         else:
             URL += URL_ATUAL[Escolha] + "/"
             URL_ATUAL = os.listdir(URL)
 
+       
     Banco.commit()
-
-YggDrasil("C:/","BancoDados.db")
