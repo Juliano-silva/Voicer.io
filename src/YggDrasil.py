@@ -2,6 +2,12 @@ import os,sqlite3,json
 from pathlib import Path
 from colorist import *
 
+Dados = r"C:\Users\sustu\Pictures\Programmation\Projeto Principais\FileWizard\src\BancoDados.db"
+conection = sqlite3.connect(Dados,check_same_thread=False)
+cursor = conection.cursor()
+cursor.execute(f"SELECT * FROM History")
+rows_Length = cursor.fetchall()
+
 
 Lista_Extensão = '''{
     "Extension":[
@@ -11,12 +17,13 @@ Lista_Extensão = '''{
     ]
     }'''
 
-def YggDrasil(URL,File):
-    Banco = sqlite3.connect(File)
-    cursor = Banco.cursor()
+def Chamar(URL):
     URL_ATUAL = os.listdir(URL)
     cursor.execute("""CREATE TABLE IF NOT EXISTS History (id INTEGER PRIMARY key AUTOINCREMENT,name TEXT,arquivo ou Pasta BLOB)""")
-    
+    cursor.execute("""   delete from History where rowid not in
+                   (select min(rowid) from History
+                   group by arquivo
+                   ); """)
     while True:
         if os.path.isfile(URL) == True:
             break
@@ -46,4 +53,23 @@ def YggDrasil(URL,File):
             URL_ATUAL = os.listdir(URL)
 
        
-    Banco.commit()
+    conection.commit()
+
+
+def Buscar(Escolha,index):
+    cursor.execute(f"SELECT {Escolha} FROM History")
+    rows = cursor.fetchall()
+    return rows[index]
+
+def All_respostas():
+    print(Buscar("name",1)[0])
+    for i in range(0,len(rows_Length)):
+        print(Buscar("name",i)[0])
+
+def Remover():
+    cursor.execute(""" DROP TABLE History """)
+
+    conection.commit()
+
+
+# def Listar_Dados():
