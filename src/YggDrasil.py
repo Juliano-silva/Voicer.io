@@ -61,15 +61,10 @@ def Buscar(Escolha,index):
     rows = cursor.fetchall()
     return rows[index]
 
-def All_respostas():
-    print(Buscar("name",1)[0])
-    for i in range(0,len(rows_Length)):
-        print(Buscar("name",i)[0])
+def All_respostas(columname,index): return Buscar(f"{columname}",index)[0]
+def Row_Length(): return len(rows_Length)
 
 def Remover():
     cursor.execute(""" DROP TABLE History """)
 
     conection.commit()
-
-
-# def Listar_Dados():
