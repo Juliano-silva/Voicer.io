@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #252525;
+}
+
+
+#Borda{
+    border: 0.6vh solid red;
+    border-radius: 50%;
+    width: 50vh;
+    height: 50vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: 0.2s;
+    background-image: url("https://i.pinimg.com/736x/1b/e2/74/1be274406efe54b84d1a17fd17ecb9e5.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

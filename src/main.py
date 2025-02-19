@@ -16,16 +16,13 @@ def Ygg():
     return "",205
 
 @app.route("/Voice",methods=["GET","POST"])
-def Voicees():
+def Voices():
     data = request.get_json()
     ComandoVoz = str(data["Voz"]).lower()
-    
     for i in range(0,YggDrasil.Row_Length()):
         Arquivo_Name = str(YggDrasil.All_respostas("name",i)).lower().split(".")[0]
         if ComandoVoz == f"abrir {Arquivo_Name}":
             os.startfile(fr"{YggDrasil.All_respostas("arquivo",i)}")
-        elif ComandoVoz == f"fechar {Arquivo_Name}":
-            print("Fechar")
     if ComandoVoz == "abrir google":
         os.startfile(r"C:\Users\sustu\AppData\Local\Programs\Opera GX\opera.exe")
     elif ComandoVoz == "fechar google":

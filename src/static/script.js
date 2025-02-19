@@ -1,5 +1,6 @@
 var On_Neuron = document.getElementById("On_Neuron")
 var output = document.getElementById("output")
+var Menu = document.getElementById("Menu")
 
 var Microfone_Ligado = false
 
@@ -59,3 +60,12 @@ function Ligar(){
     contentType: 'application/json'
   })
 }
+
+Menu.addEventListener("click",function(){
+  var Sidebar = document.getElementById("Sidebar")
+  if(getComputedStyle(Sidebar).display == "none"){
+    Sidebar.style.display = "block"
+  }else{
+    Sidebar.style.display = "none"
+  }
+})
