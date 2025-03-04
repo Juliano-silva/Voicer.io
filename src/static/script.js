@@ -1,71 +1,46 @@
-var On_Neuron = document.getElementById("On_Neuron")
-var output = document.getElementById("output")
-var Menu = document.getElementById("Menu")
+function Microfone(Ligado){
+    document.getElementById("Microfone").innerHTML = ""
+    if(Ligado){
+        const recognition = new webkitSpeechRecognition();
 
-var Microfone_Ligado = false
+        recognition.lang = "pt-BR"
+        recognition.continuous = true
+        recognition.interimResults = true
+    
+        recognition.onresult = (event) => {
+            let transcript = ""
+    
+            for(let i = event.resultIndex; i < event.results.length; i++){
+                transcript += event.results[i][0].transcript
+            }
+    
+            document.getElementById("Microfone").innerHTML = transcript
+            $.ajax({
+                url:"/Main_Microfone",
+                type:"POST",
+                contentType: 'application/json',
+                data: JSON.stringify({"Value":transcript})
+            })
+        }
+    
+        recognition.start();
+        document.getElementById("Main").style.borderColor = "green"
+    }
+    else{
+        document.getElementById("Main").style.borderColor = "red"
+    }
+}
 
-function On_Microfone(){
-    if (!('webkitSpeechRecognition' in window)) {
-        alert("Seu navegador não suporta a Web Speech API. Tente usar o Google Chrome.");
+var Alavanca = true
+
+document.getElementById("Main").addEventListener("click",function(){
+    if(Alavanca){
+        console.log("Microfone Off");
+        Alavanca = false
     }else{
-    const recognition = new webkitSpeechRecognition();
-  
-    recognition.lang = "pt-BR"; 
-    recognition.continuous = true; 
-    recognition.interimResults = true; 
-  
-    recognition.onresult = (event) => {
-      let transcript = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        transcript += event.results[i][0].transcript;
-      }
-      output.innerText = transcript;
-      $.ajax({
-        url:"/Voice",
-        type:"POST",
-        contentType: 'application/json',
-        data:JSON.stringify({
-            "Voz":transcript  
-        })
-      })
-    };
-  
-    recognition.start();
-  
-    console.log("Reconhecimento de fala iniciado!");
+        console.log("Microfone On");
+        Alavanca = true
+    }    
 
-
-    }
-}
-
-On_Neuron.addEventListener("click",function(){
-    if(Microfone_Ligado == false){
-        On_Neuron.style.border = "1vh solid green"
-        On_Microfone()
-        console.log("Microfone Ligado");
-        Microfone_Ligado = true
-    }
-    else if(Microfone_Ligado == true){
-        On_Neuron.style.border = "0vh"
-        Microfone_Ligado = false
-        console.log("Microfone Desligado");
-        output.innerText = ""
-    }
-})
-
-function Ligar(){
-  $.ajax({
-    url:"/YggDrasil",
-    type:"GET",
-    contentType: 'application/json'
-  })
-}
-
-Menu.addEventListener("click",function(){
-  var Sidebar = document.getElementById("Sidebar")
-  if(getComputedStyle(Sidebar).display == "none"){
-    Sidebar.style.display = "block"
-  }else{
-    Sidebar.style.display = "none"
-  }
+    Microfone(Alavanca)
 })

@@ -4,57 +4,14 @@
 }
 
 body{
-    background-color: rgb(9, 4, 36);
-}
-
-#Assistente{
+    background-color: #252525;
     color: white;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    border-radius: 0.4vh;
-    background-color: rgb(9, 28, 44);
-    width: 40%;
-    height: 80vh;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    text-align: center;
-    padding: 2vh;
 }
 
-img{
+#Main{
+    border: 2vh solid red;
+    height: 50vh;
+    width: 50vh;
     border-radius: 50%;
-    height: 60vh;
-    width: 80%;
-    margin-top: 2vh;
-    border-radius: 50%;
-}
-
-#Sidebar{
-    background-color: brown;
-    width: 10%;
-    height: 100vh;
-    position: fixed;
-    z-index: 0;
-    display: none;
-    top: 0;
-}
-
-#Sidebar > button{
-    display: block;
-    margin: auto;
-    margin-top: 2vh;
-}
-
-
-
-#Menu{
-    all: unset;
-    top: 0;
-    position: fixed;
-    font-size: 5vh;
-    padding: 1.5vh;
     cursor: pointer;
-    color: white;
-    z-index: 1;
 }

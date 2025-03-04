@@ -1,0 +1,10 @@
+# FileWizard
+Projeto de Automação
+
+# Oque ela vai ter
+* Abrir com comando de Voz X
+* Faça pesquisa no google X
+* Listar Arquivos
+* Ache Arquivos
+* Possa ser modificada
+* Abrir e Fechar outros arquivos 
